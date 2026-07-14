@@ -1,0 +1,6 @@
+train: C:\Affan\Affan\__CODING__\__PROJECTS__\Classroom Analyser\train
+val: C:\Affan\Affan\__CODING__\__PROJECTS__\Classroom Analyser\val
+
+nc: 7
+
+names: ["Affan", "Using_mobile", "Faizan", "working", "gossiping", "sleeping", "shafaq"]

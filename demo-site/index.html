@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classroom Analyser</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  h1 { font-size: 2rem; margin-bottom: 8px; }
+  h1 span { color: #38bdf8; }
+  p.sub { color: #94a3b8; margin-bottom: 30px; text-align: center; max-width: 640px; }
+  .card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  }
+  .label {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .label.input { background: #334155; color: #cbd5e1; }
+  .label.output { background: #065f46; color: #6ee7b7; }
+  video { width: 100%; border-radius: 10px; display: block; background: #000; }
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    background: #38bdf8;
+    color: #0f172a;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  button:hover { background: #7dd3fc; }
+  button:disabled { background: #475569; color: #94a3b8; cursor: wait; }
+  .legend { margin-top: 18px; display: none; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .legend span {
+    background: #334155; padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; color: #cbd5e1;
+  }
+</style>
+</head>
+<body>
+  <h1>Classroom <span>Analyser</span></h1>
+  <p class="sub">AI-powered classroom monitoring using a custom-trained YOLOv11 model &mdash;
+  detects students and classifies their activity (working, using mobile, gossiping, sleeping) in real time.</p>
+
+  <div class="card">
+    <span class="label input" id="label">INPUT &mdash; Raw classroom footage</span>
+    <video id="player" src="videos/input.mp4" controls muted playsinline></video>
+    <button id="analyseBtn">Analyse Classroom &#9654;</button>
+    <div class="legend" id="legend">
+      <span>Affan</span><span>Faizan</span><span>Shafaq</span>
+      <span>Working</span><span>Using mobile</span><span>Gossiping</span><span>Sleeping</span>
+    </div>
+  </div>
+
+<script>
+  const btn = document.getElementById('analyseBtn');
+  const player = document.getElementById('player');
+  const label = document.getElementById('label');
+  const legend = document.getElementById('legend');
+
+  btn.addEventListener('click', () => {
+    btn.disabled = true;
+    btn.textContent = 'Analysing frames with YOLOv11...';
+    setTimeout(() => {
+      player.src = 'videos/output.mp4';
+      player.play();
+      label.textContent = 'OUTPUT - Detected activities';
+      label.className = 'label output';
+      legend.style.display = 'flex';
+      btn.disabled = false;
+      btn.innerHTML = 'Watch Original Input &#8634;';
+      btn.onclick = () => location.reload();
+    }, 2500);
+  });
+</script>
+</body>
+</html>

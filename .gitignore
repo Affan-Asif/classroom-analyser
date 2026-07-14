@@ -1,0 +1,21 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Large videos (exceed GitHub's 100MB limit) - demo-site/videos/ stays tracked
+/class.mp4
+/class_resized.mp4
+runs/
+input/
+
+# Dataset folders
+images/
+labels/
+train/
+val/
+
+# Model weights (comment out if you want them in the repo)
+*.pt
